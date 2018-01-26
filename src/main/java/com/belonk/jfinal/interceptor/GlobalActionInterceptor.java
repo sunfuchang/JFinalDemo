@@ -1,10 +1,7 @@
-package com.belonk.jfinal.controller;
+package com.belonk.jfinal.interceptor;
 
-import com.belonk.jfinal.interceptor.TxInterceptor;
-import com.belonk.jfinal.model.Hello;
-import com.belonk.jfinal.service.HelloService;
-import com.jfinal.aop.Enhancer;
-import com.jfinal.core.Controller;
+import com.jfinal.aop.Interceptor;
+import com.jfinal.aop.Invocation;
 
 /**
  * Created by sun on 2018/1/24.
@@ -13,7 +10,7 @@ import com.jfinal.core.Controller;
  * @version 1.0
  * @since 1.0
  */
-public class HelloController extends Controller {
+public class GlobalActionInterceptor implements Interceptor {
     //~ Static fields/initializers =====================================================================================
 
 
@@ -25,12 +22,10 @@ public class HelloController extends Controller {
 
     //~ Methods ========================================================================================================
 
-    public void hello() {
-        render("hello");
-    }
-
-    public void save() {
-        HelloService helloService = Enhancer.enhance(HelloService.class, TxInterceptor.class);
-        helloService.save(getModel(Hello.class));
+    @Override
+    public void intercept(Invocation invocation) {
+        System.out.println("Before GlobalActionInterceptor...");
+        invocation.invoke();
+        System.out.println("After GlobalActionInterceptor...");
     }
 }

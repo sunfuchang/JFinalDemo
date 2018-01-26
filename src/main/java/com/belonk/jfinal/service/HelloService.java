@@ -1,22 +1,26 @@
-package com.belonk.jfinal.model;
+package com.belonk.jfinal.service;
 
 import com.jfinal.plugin.activerecord.Model;
 
 /**
- * Created by sun on 2018/1/24.
+ * Created by sun on 2018/1/26.
  *
  * @author sunfuchang03@126.com
  * @version 1.0
  * @since 1.0
  */
-public class Test extends Model<Test> {
+public class HelloService {
     //~ Static fields/initializers =====================================================================================
 
-    public static final Test me = new Test();
 
     //~ Instance fields ================================================================================================
 
+
     //~ Constructors ===================================================================================================
 
+
     //~ Methods ========================================================================================================
+    public <T extends Model> void save(T model) {
+        model.save();
+    }
 }

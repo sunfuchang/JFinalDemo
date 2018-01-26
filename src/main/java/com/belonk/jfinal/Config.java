@@ -2,11 +2,14 @@ package com.belonk.jfinal;
 
 import com.belonk.jfinal.controller.HelloController;
 import com.belonk.jfinal.controller.IndexController;
-import com.belonk.jfinal.interceptor.FrontInterceptor;
-import com.belonk.jfinal.model.Test;
+import com.belonk.jfinal.interceptor.ControlInjectlerInterceptor;
+import com.belonk.jfinal.interceptor.GlobalActionInterceptor;
+import com.belonk.jfinal.interceptor.GlobalServiceInterceptor;
+import com.belonk.jfinal.model.Hello;
 import com.jfinal.config.*;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
 
@@ -43,7 +46,8 @@ public class Config extends JFinalConfig {
     @Override
     public void configRoute(Routes me) {
         me.setBaseViewPath("/pages");
-        me.addInterceptor(new FrontInterceptor());
+        // Inject拦截器
+        me.addInterceptor(new ControlInjectlerInterceptor());
         me.add("/", IndexController.class);
         me.add("/hello", HelloController.class);
     }
@@ -55,13 +59,17 @@ public class Config extends JFinalConfig {
         me.add(dp);
         // active record插件
         ActiveRecordPlugin arp = new ActiveRecordPlugin(dp);
-        arp.addMapping("test", Test.class);
+        arp.addMapping("hello", Hello.class);
         me.add(arp);
+        arp.setDialect(new MysqlDialect());
     }
 
     @Override
     public void configInterceptor(Interceptors me) {
-
+        // 全局Action拦截器
+        me.addGlobalActionInterceptor(new GlobalActionInterceptor());
+        // 全局Service拦截器
+        me.addGlobalServiceInterceptor(new GlobalServiceInterceptor());
     }
 
     @Override
