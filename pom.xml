@@ -50,6 +50,11 @@
             <artifactId>jfinal</artifactId>
             <version>${jfinal.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>jfinal-java8</artifactId>
+            <version>${jfinal.version}</version>
+        </dependency>
         <!--<dependency>
             <groupId>com.jfinal</groupId>
             <artifactId>jfinal-weixin</artifactId>
@@ -102,6 +107,12 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>8.1.8</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -114,6 +125,7 @@
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
                     <encoding>UTF-8</encoding>
+                    <compilerArgument>-parameters</compilerArgument>
                 </configuration>
             </plugin>
             <plugin>
