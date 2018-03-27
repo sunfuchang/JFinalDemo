@@ -25,8 +25,14 @@ public class HelloController extends Controller {
 
     //~ Methods ========================================================================================================
 
-    public void hello() {
-        render("hello");
+    public void index() {
+        render("hello.html");
+    }
+
+    public void say() {
+        String user = getPara(0);
+        String word = getPara(1);
+        renderText(user + " say : " + word);\
     }
 
     public void save() {

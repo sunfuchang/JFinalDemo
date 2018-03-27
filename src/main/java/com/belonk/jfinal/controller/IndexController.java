@@ -22,6 +22,6 @@ public class IndexController extends Controller {
     //~ Methods ========================================================================================================
 
     public void index() {
-        renderText("Hello JFinal!!!");
+        render("/index.html");
     }
 }
